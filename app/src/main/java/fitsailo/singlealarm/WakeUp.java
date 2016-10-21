@@ -18,6 +18,7 @@ public class WakeUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wake_up);
+       
 
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
@@ -53,6 +54,8 @@ public class WakeUp extends AppCompatActivity {
 
         super.onResume();
     }
+
+
 
     @Override
     protected void onDestroy() {

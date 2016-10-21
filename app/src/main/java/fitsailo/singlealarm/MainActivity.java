@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
 
-        TimePicker time= (TimePicker) findViewById(R.id.timePicker);
-        ToggleButton button= (ToggleButton) findViewById(R.id.toggleButton);
 
         Button okButton=(Button)findViewById(R.id.ok);
         okButton.setOnClickListener(new View.OnClickListener() {
