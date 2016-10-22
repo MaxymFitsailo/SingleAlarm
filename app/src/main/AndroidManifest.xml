@@ -22,7 +22,7 @@
             android:exported="false" />
 
         <activity android:name=".WakeUp"
-                   android:screenOrientation="portrait"/>
+                   />
 
         <receiver
             android:name=".OnRebootReceiver"

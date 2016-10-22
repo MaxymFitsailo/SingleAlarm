@@ -18,7 +18,7 @@ public class WakeUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wake_up);
-       
+
 
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
@@ -33,11 +33,12 @@ public class WakeUp extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                mediaPlayer.stop();
+               // mediaPlayer.stop();
                 SharedPreferences share = getSharedPreferences(MainActivity.SETTINGS, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=share.edit();
                 editor.putBoolean(MainActivity.ACTIVE,false);
                 editor.apply();
+                stopService(new Intent(WakeUp.this,SingleAlarmService.class));
                 startActivity(new Intent(WakeUp.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
@@ -47,9 +48,9 @@ public class WakeUp extends AppCompatActivity {
     @Override
     protected void onResume() {
 
-            mediaPlayer = MediaPlayer.create(WakeUp.this, R.raw.aces);
-            mediaPlayer.setLooping(true);
-            mediaPlayer.start();
+           // mediaPlayer = MediaPlayer.create(WakeUp.this, R.raw.aces);
+            //mediaPlayer.setLooping(true);
+            //mediaPlayer.start();
 
 
         super.onResume();

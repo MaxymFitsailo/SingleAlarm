@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import java.util.TimerTask;
 
 public class SingleAlarmService extends Service {
     SharedPreferences share;
+    MediaPlayer mediaPlayer;
     public SingleAlarmService() {
     }
 
@@ -47,7 +49,10 @@ public class SingleAlarmService extends Service {
             public void run() {
 
                 startActivity(new Intent(SingleAlarmService.this, WakeUp.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                stopSelf();
+                mediaPlayer = MediaPlayer.create(SingleAlarmService.this, R.raw.aces);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
+                // stopSelf();
             }
         };
 
@@ -66,6 +71,9 @@ public class SingleAlarmService extends Service {
 
     @Override
     public void onDestroy() {
+        if (mediaPlayer!=null){
+            mediaPlayer.stop();
+            mediaPlayer.release();}
 
         Toast.makeText(this,"service stop",Toast.LENGTH_SHORT).show();
         super.onDestroy();
