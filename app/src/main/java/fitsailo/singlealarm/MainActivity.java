@@ -10,14 +10,12 @@ import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public final static String SETTINGS="Settings";
     public final static String ACTIVE="";
     public final static String HOURS="Hours";
     public final static String MINUTES="Minutes";
     private SharedPreferences share;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,29 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         share = getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
-        loadActivityState(share);
-
-
+        loadAlarmSettings(share);
+        Button okButton=(Button)findViewById(R.id.apply);
+        okButton.setOnClickListener(this);
 
     }
-
-    @Override
-    protected void onResume() {
-
-
-        Button okButton=(Button)findViewById(R.id.ok);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveActivityState(share);
-                stopService(new Intent(MainActivity.this,SingleAlarmService.class));
-                startService(new Intent(MainActivity.this,SingleAlarmService.class));
-            }
-        });
-        super.onResume();
-    }
-
-    void loadActivityState(SharedPreferences share){
+    //загружаем данные о состоянии будильника из файла  в SharedPreferences
+    void loadAlarmSettings(SharedPreferences share){
          TimePicker time= (TimePicker) findViewById(R.id.timePicker);
          time.setIs24HourView(true);
          ToggleButton button= (ToggleButton) findViewById(R.id.toggleButton);
@@ -56,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
          button.setChecked(share.getBoolean(ACTIVE,false));
 
     }
-    void saveActivityState(SharedPreferences share){
+    //записываем данные о состоянии будильника в файл в SharedPreferences
+    void saveAlarmSettings(SharedPreferences share){
         SharedPreferences.Editor editor=share.edit();
         TimePicker time= (TimePicker) findViewById(R.id.timePicker);
         ToggleButton button= (ToggleButton) findViewById(R.id.toggleButton);
@@ -65,9 +48,16 @@ public class MainActivity extends AppCompatActivity {
         if (button.isChecked()) editor.putBoolean(ACTIVE,true);
         else editor.putBoolean(ACTIVE,false);
         editor.apply();
-
     }
 
-
-
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.apply:
+                saveAlarmSettings(share);
+                stopService(new Intent(this,SingleAlarmService.class));
+                startService(new Intent(this,SingleAlarmService.class));
+                break;
+        }
+    }
 }

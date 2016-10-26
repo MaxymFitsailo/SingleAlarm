@@ -22,7 +22,7 @@
         android:text="@string/Apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ok"
+        android:id="@+id/apply"
         android:layout_marginTop="18dp"
         android:layout_below="@+id/timePicker"
         android:layout_alignParentStart="true" />
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/toggleButton"
         style="@android:style/Widget.Button.Toggle"
-        android:layout_above="@+id/ok"
+        android:layout_above="@+id/apply"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="61dp" />
 </RelativeLayout>

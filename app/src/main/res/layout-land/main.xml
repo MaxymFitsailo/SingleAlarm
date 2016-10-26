@@ -22,7 +22,7 @@
         android:text="@string/Apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ok"
+        android:id="@+id/apply"
         android:layout_below="@+id/timePicker"
         android:layout_alignParentStart="true" />
 

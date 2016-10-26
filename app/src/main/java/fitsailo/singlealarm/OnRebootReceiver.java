@@ -11,8 +11,8 @@ public class OnRebootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
-            Intent pushIntent = new Intent(context, SingleAlarmService.class);
-            context.startService(pushIntent);
+            Intent onRebootIntent = new Intent(context, SingleAlarmService.class);
+            context.startService(onRebootIntent);
         }
 
 
